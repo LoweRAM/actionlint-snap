@@ -1,0 +1,7 @@
+name: ShellCheck Error
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $unquoted_variable
