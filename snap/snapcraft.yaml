@@ -1,20 +1,38 @@
 name: actionlint
 title: actionlint
 base: core24
-summary: An extremely fast Python package installer and resolver, written in Rust.
+summary: Static checker for GitHub Actions workflow files
 description: |
-  actionlint is a static checker for GitHub Actions workflow files. Try it online!
+  [actionlint](https://github.com/rhysd/actionlint) is a static checker for
+  GitHub Actions workflow files. [Try it
+  online!](https://rhysd.github.io/actionlint)
 
   Features:
 
-  - Syntax check for workflow files to check unexpected or missing keys following workflow syntax
-  - Strong type check for ${{ }} expressions to catch several semantic errors like access to not existing property, type mismatches, ...
-  - Actions usage check to check that inputs at with: and outputs in steps.{id}.outputs are correct
-  - Reusable workflow check to check inputs/outputs/secrets of reusable workflows and workflow calls
-  - shellcheck and pyflakes integrations for scripts at run:
-  - Security checks; script injection by untrusted inputs, hard-coded credentials
-  - Other several useful checks; glob syntax validation, dependencies check for needs:, runner label validation, cron syntax validation, ...
+  - **Syntax check for workflow files** to check unexpected or missing keys
+    following workflow syntax
+  - **Strong type check for `${{ }}` expressions** to catch several semantic
+    errors like access to not existing property, type mismatches, ...
+  - **Actions usage check** to check that inputs at `with:` and outputs in
+    `steps.{id}.outputs` are correct
+  - **Reusable workflow check** to check inputs/outputs/secrets of reusable
+    workflows and workflow calls
+  - **[shellcheck](https://github.com/koalaman/shellcheck) and
+    [pyflakes](https://github.com/PyCQA/pyflakes) integrations** for scripts at
+    `run:`
+  - **Security checks**; script injection by untrusted inputs, hard-coded
+    credentials
+  - **Other several useful checks**; glob syntax validation, dependencies check
+    for `needs:`, runner label validation, cron syntax validation, ...
 
+  See the [full
+  list](https://github.com/rhysd/actionlint/blob/main/docs/checks.md) of checks
+  done by actionlint.
+
+license: MIT
+contact: https://github.com/lengau/actionlint-snap/issues
+issues: https://github.com/lengau/actionlint-snap/issues
+source-code: https://github.com/lengau/actionlint-snap
 
 adopt-info: actionlint
 grade: stable
