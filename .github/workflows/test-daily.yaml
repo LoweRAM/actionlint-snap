@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Install
         run: |
-          sudo snap install --classic --channel ${{ matrix.channel }} astral-uv
+          sudo snap install --channel ${{ matrix.channel }} actionlint
       - name: checkout
         uses: actions/checkout@v5
       - name: Test
