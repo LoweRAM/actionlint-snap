@@ -30,6 +30,10 @@ description: |
   list](https://github.com/rhysd/actionlint/blob/main/docs/checks.md) of checks
   done by actionlint.
 
+license: MIT
+contact: https://github.com/lengau/actionlint-snap/issues
+issues: https://github.com/lengau/actionlint-snap/issues
+source-code: https://github.com/lengau/actionlint-snap
 
 grade: stable
 confinement: strict
