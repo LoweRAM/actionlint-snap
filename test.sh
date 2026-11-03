@@ -4,6 +4,8 @@
 set -euo pipefail
 
 export PATH="/snap/bin:$PATH"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 echo "::group::Check actionlint version"
 actionlint --version
@@ -13,42 +15,18 @@ echo "::group::Lint repo workflows"
 actionlint
 echo "::endgroup::"
 
-echo "::group::Check valid workflow via stdin"
-actionlint - << 'EOF'
-name: Valid Workflow
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "hello world"
-EOF
+echo "::group::Lint valid workflows in test-data/valid"
+actionlint test-data/valid/*.yaml
 echo "::endgroup::"
 
-echo "::group::Check invalid workflow fails"
-if actionlint - << 'EOF' 2>/dev/null
-name: Invalid
-EOF
-then
-  echo "Expected actionlint to fail on invalid workflow, but it succeeded." >&2
-  exit 1
-fi
-echo "::endgroup::"
-
-echo "::group::Check bundled shellcheck integration"
-if actionlint - << 'EOF' 2>/dev/null
-name: ShellCheck Test
-on: push
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo $unquoted_variable
-EOF
-then
-  echo "Expected actionlint to report shellcheck issue SC2086, but it succeeded." >&2
-  exit 1
-fi
-echo "::endgroup::"
+for file in test-data/invalid/*.yaml; do
+  echo "::group::Check invalid workflow fails: $file"
+  if actionlint "$file" 2>/dev/null; then
+    echo "Expected actionlint to fail on $file, but it succeeded." >&2
+    exit 1
+  fi
+  echo "Successfully caught expected error in $file"
+  echo "::endgroup::"
+done
 
 echo "All tests passed successfully."

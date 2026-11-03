@@ -10,6 +10,7 @@ on:
     paths:
       - .github/workflows/test-daily.yaml
       - test.sh
+      - test-data/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
